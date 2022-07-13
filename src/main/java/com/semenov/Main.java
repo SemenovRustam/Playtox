@@ -29,6 +29,8 @@ public class Main {
             futureList.add(CompletableFuture.runAsync(() -> transaction.transferMoney(account3, account4, Utils.createRandomAmount()), executorService));
         }
         futureList.forEach(CompletableFuture::join);
+        log.info("Program completes successfully !");
+        System.exit(0);
     }
 
     private static Account createAccount() {
