@@ -14,12 +14,12 @@ public class Transaction {
     private Account from;
 
     public void transferMoney(Account to, Account from, Integer money) {
-        validateTransaction(to, money);
+        validateTransaction(from, money);
 
-        to.depositMoney(money);
+        depositMoney(to, money);
         log.info("Account {} deposit money {} $. Total amount {}$", to.getId(), money, to.getMoney());
 
-        from.withdrawalMoney(money);
+        withdrawalMoney(from, money);
         log.info("Account {} withdrawal money {} $. Total amount {}$\n", from.getId(), money, from.getMoney());
         try {
             Thread.sleep(Utils.getRandomTime());
@@ -28,14 +28,22 @@ public class Transaction {
         }
     }
 
-    private void validateTransaction(Account to, Integer money) {
-        if (to.getMoney() < 0) {
-            log.warn("Error! Amount  can`t be less 0!");
-            throw new TransactionException("Error! Amount can`t be less 0!");
-        }
-        if (to.getMoney() - money < 0) {
+    private void depositMoney(Account to, int deposit) {
+        Integer balance = to.getMoney();
+        balance += deposit;
+        to.setMoney(balance);
+    }
+
+    private void withdrawalMoney(Account from, int withdrawal) {
+        Integer balance = from.getMoney();
+        balance -= withdrawal;
+        from.setMoney(balance);
+    }
+
+    private void validateTransaction(Account from, Integer money) {
+        if (from.getMoney() - money < 0) {
             log.warn("Error! Insufficient funds to write off");
-            throw new TransactionException("Error! Insufficient funds to write off");
+            throw new TransactionException("Insufficiently money!");
         }
     }
 }

@@ -21,6 +21,7 @@ public class Main {
         Account account2 = createAccount();
         Account account3 = createAccount();
         Account account4 = createAccount();
+        List<Account> accountList = List.of(account1, account2, account3, account4);
         Transaction transaction = new Transaction();
 
         List<CompletableFuture<Void>> futureList = new ArrayList<>();
@@ -29,8 +30,14 @@ public class Main {
             futureList.add(CompletableFuture.runAsync(() -> transaction.transferMoney(account3, account4, Utils.createRandomAmount()), executorService));
         }
         futureList.forEach(CompletableFuture::join);
+        executorService.shutdown();
+
+        int totalMoney = accountList.stream()
+                .mapToInt(Account::getMoney)
+                .sum();
+
+        log.info("total amount on all accounts = {} $", totalMoney);
         log.info("Program completes successfully !");
-        System.exit(0);
     }
 
     private static Account createAccount() {

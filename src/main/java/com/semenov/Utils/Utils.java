@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Utils {
-    private static final Integer MONEY = 10_000;
+
 
     public static int createRandomId() {
         return ThreadLocalRandom.current().nextInt(1000, 9999);
