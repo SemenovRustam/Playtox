@@ -3,6 +3,8 @@ package com.semenov;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class TransactionTest {
 
-    @InjectMocks
+   @Spy
     private Transaction transaction;
 
     @Test

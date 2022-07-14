@@ -5,7 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Utils {
 
-
     public static int createRandomId() {
         return ThreadLocalRandom.current().nextInt(1000, 9999);
     }
@@ -17,5 +16,4 @@ public class Utils {
     public static int getRandomTime() {
         return ThreadLocalRandom.current().nextInt(1000, 2000);
     }
-
 }
