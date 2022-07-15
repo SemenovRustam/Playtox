@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @NoArgsConstructor
 public class Transaction {
-    private Account to;
-    private Account from;
 
     public void transferMoney(Account to, Account from, Integer money) {
         validateTransaction(from, money);
